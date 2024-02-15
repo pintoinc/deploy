@@ -1,9 +1,9 @@
-FROM golang:1.19-alpine as builder
+FROM golang:1.22-alpine as builder
 
 ARG TARGETOS
 ARG TARGETPLATFORM
 ARG TARGETARCH
-ARG CADDY_VERSION="v2.6.4"
+ARG CADDY_VERSION="v2.7.6"
 ENV CADDY_VERSION=$CADDY_VERSION
 RUN echo building caddy $CADDY_VERSION for "$TARGETOS"
 
@@ -13,7 +13,8 @@ RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH xcaddy build \
     --with github.com/abiosoft/caddy-yaml \
-    --with github.com/mholt/caddy-l4
+    --with github.com/mholt/caddy-l4 \
+    --with github.com/gamalan/caddy-tlsredis
 
 FROM alpine
 

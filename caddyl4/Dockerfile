@@ -14,7 +14,7 @@ RUN go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 RUN GOOS=$TARGETOS GOARCH=$TARGETARCH xcaddy build \
     --with github.com/abiosoft/caddy-yaml \
     --with github.com/mholt/caddy-l4 \
-    --with github.com/gamalan/caddy-tlsredis
+    --with github.com/pberkel/caddy-storage-redis
 
 FROM alpine
 
